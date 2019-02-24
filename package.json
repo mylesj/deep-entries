@@ -1,6 +1,6 @@
 {
 	"name": "deep-entries",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "return a flat array of key-values from a deep nested structure",
 	"author": "mylesj <hi@myles.ninja>",
 	"license": "ISC",
