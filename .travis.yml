@@ -10,6 +10,5 @@ before_install:
 
 script:
   - npm run build
-  - npm run test -- --verbose
   - npm run test -- --verbose --collectCoverage --coverageDirectory ./test/coverage/
   - cat ./test/coverage/lcov.info | coveralls
