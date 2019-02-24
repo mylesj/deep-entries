@@ -7,7 +7,7 @@
 
 -   Comparable to: [`Object.entries()`][ext:object.entries]
 
-A utility for returning deeply nested key-values as tuples of variable length.
+A utility for returning deeply nested key-values as tuples of varying length.
 
 ## exposes
 
@@ -65,7 +65,7 @@ const input = {
 ```js
 deepEntries(input)
 // [
-// 	[ 'foo', 1 ],
+//     [ 'foo', 1 ],
 //     [ 'bar', 'deep', 'key', 2 ],
 //     [ 'baz', '0', 3 ],
 //     [ 'baz', '1', '0', 4 ],
