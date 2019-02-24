@@ -1,7 +1,7 @@
 {
 	"name": "deep-entries",
 	"version": "0.3.1",
-	"description": "return a flat array of key-values from a deep nested structure",
+	"description": "flatten nested object entries",
 	"author": "mylesj <hi@myles.ninja>",
 	"license": "ISC",
 	"repository": "github:mylesj/deep-entries",
@@ -10,12 +10,14 @@
 		"object",
 		"entries",
 		"object.entries",
-		"deep",
-		"nested",
-		"flat",
-		"array",
 		"iterator",
-		"generator"
+		"generator",
+		"deep",
+		"deepentries",
+		"nested",
+		"array",
+		"flat",
+		"flatten"
 	],
 	"files": [
 		"dist/"
