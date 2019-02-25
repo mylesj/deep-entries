@@ -155,44 +155,42 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
-	describe('custom transform', () => {
-		describe('should optionally apply a transform function', () => {
-			const input = {
-				a: 0,
-				b: [0],
-				c: {
-					[1]: [
-						0,
-						{
-							[1]: 0,
-							[2]: 0
-						},
-						0
-					]
-				}
+	describe('should optionally apply a transform function', () => {
+		const input = {
+			a: 0,
+			b: [0],
+			c: {
+				[1]: [
+					0,
+					{
+						[1]: 0,
+						[2]: 0
+					},
+					0
+				]
 			}
-			const iterator = deepEntriesIterator(input, delimitEntry)
-			let step
-			;[
-				['a', 0],
-				['b.0', 0],
-				['c.1.0', 0],
-				['c.1.1.1', 0],
-				['c.1.1.2', 0],
-				['c.1.2', 0]
-			].forEach(expected =>
-				it(`[${expected.join(', ')}]`, () => {
-					step = iterator.next()
-					expect(step.done).toBe(false)
-					expect(expected).toEqual(step.value)
-				})
-			)
-
-			it(`-> complete`, () => {
+		}
+		const iterator = deepEntriesIterator(input, delimitEntry)
+		let step
+		;[
+			['a', 0],
+			['b.0', 0],
+			['c.1.0', 0],
+			['c.1.1.1', 0],
+			['c.1.1.2', 0],
+			['c.1.2', 0]
+		].forEach(expected =>
+			it(`[${expected.join(', ')}]`, () => {
 				step = iterator.next()
-				expect(step.done).toBe(true)
-				expect(step.value).toBe(undefined)
+				expect(step.done).toBe(false)
+				expect(expected).toEqual(step.value)
 			})
+		)
+
+		it(`-> complete`, () => {
+			step = iterator.next()
+			expect(step.done).toBe(true)
+			expect(step.value).toBe(undefined)
 		})
 	})
 })
