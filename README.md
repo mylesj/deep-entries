@@ -12,9 +12,9 @@ A utility for returning deeply nested key-values as tuples of varying length.
 ## exposes
 
 -   **deepEntries**  
-    => ( input: _Object | Array_, transform?: _function_ ): _Array[]_
+    => ( input: _Object | Array_, map?: _function_ ): _Array[]_
 -   **deepEntriesIterator**  
-    => ( input: _Object | Array_, transform?: _function_ ): _Iterator_
+    => ( input: _Object | Array_, map?: _function_ ): _Iterator_
 -   **delimitEntryBy**  
     => ( input: _string_ ): _function_
 -   **delimitEntry**  
@@ -74,7 +74,7 @@ deepEntries(input)
 // ]
 ```
 
-`deepEntries()` will accept an optional transform function as a second parameter.
+`deepEntries()` will accept an optional map function as a second parameter.
 
 -   Note that `delimitEntry` is equivalent to `delimitEntryBy('.')`
 
@@ -90,9 +90,10 @@ deepEntries(input, delimitEntry)
 // ]
 ```
 
-`deepEntries()` is simply a shorthand call to `deepEntriesIterator()` which aids performant
-iteration of larger structures. The `rotateEntry()` transform rotates the array by one (_i.e._ putting the
-value first), allowing for more convenient destructuring of an entry.
+`deepEntries()` is a shorthand call that collects all entries from a `deepEntriesIterator()`, which is
+exposed separately to aid in performant iteration of larger structures. The `rotateEntry()` map
+function rotates the entry array by `1` (_i.e._ putting the value first), allowing for more convenient
+destructuring of an entry.
 
 ```js
 for (let [value, ...keys] of deepEntriesIterator(input, rotateEntry)) {
@@ -110,9 +111,10 @@ It's worth noting that objects can have assigned iterators too.
 
 ```js
 const { withIterator } = require('with-iterator')
-withIterator(function*() {
+const withDeepEntriesIterator = withIterator(function*() {
 	yield* deepEntriesIterator(this, delimitEntryBy(':'))
-}, input)
+})
+withDeepEntriesIterator(input)
 Array.from(input)
 // [
 //     [ 'foo', 1 ],
@@ -126,11 +128,11 @@ Array.from(input)
 
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/0.3.1
+[repo:examples]: https://runkit.com/mylesj/deep-entries/0.3.2
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
 [img:repo-status]: https://travis-ci.org/mylesj/deep-entries.svg?branch=master
-[img:npm-version]: https://badge.fury.io/js/deep-entries.svg
-[img:commits]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
+[img:npm-version]: https://badgen.net/npm/v/deep-entries
+[img:commits]: https://badgen.net/badge/conventional%20commits/1.0.0/yellow
 [img:coveralls]: https://coveralls.io/repos/github/mylesj/deep-entries/badge.svg?branch=master

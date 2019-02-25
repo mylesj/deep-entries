@@ -12,12 +12,13 @@
 		"object.entries",
 		"iterator",
 		"generator",
-		"deep",
-		"deepentries",
 		"nested",
 		"array",
+		"flatten",
 		"flat",
-		"flatten"
+		"deep",
+		"deepentries",
+		"deepentry"
 	],
 	"files": [
 		"dist/"
