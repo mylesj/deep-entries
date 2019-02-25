@@ -1,4 +1,4 @@
 import { deepEntriesIterator } from './deepEntriesIterator'
 
-export const deepEntries = (object, transformFn) =>
-	Array.from(deepEntriesIterator(object, transformFn))
+export const deepEntries = (object, mapFn) =>
+	Array.from(deepEntriesIterator(object, mapFn))
