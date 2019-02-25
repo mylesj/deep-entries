@@ -44,7 +44,7 @@ describe('deepEntries', () => {
 		})
 	})
 
-	describe('default output', () => {
+	describe('output', () => {
 		it('should return an empty array for primitive input', () => {
 			const input = [true, null, undefined, 42, 'string', Symbol()]
 			const expected = Array(6).fill([])
@@ -122,9 +122,7 @@ describe('deepEntries', () => {
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
 		})
-	})
 
-	describe('custom transform', () => {
 		it('should optionally apply a transform function', () => {
 			const input = {
 				a: 0,
