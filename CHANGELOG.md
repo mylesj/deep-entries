@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [1.0.0](https://github.com/mylesj/deep-entries/compare/v0.3.2...v1.0.0) (2019-02-25)
+
+### Bug Fixes
+
+-   **iterators:** consistent handling of primitives ([23b7c5b](https://github.com/mylesj/deep-entries/commit/23b7c5b))
+-   **map-function:** passively ignore non-function input ([f232314](https://github.com/mylesj/deep-entries/commit/f232314))
+
+### BREAKING CHANGES
+
+-   **iterators:** strings passed as initial input behaved differently to those nested somewhere within a composite type. Primitive input will now return an empty set. _i.e._ `deepEntries('string') !== Object.entries('string')`
+
 ## [0.3.2](https://github.com/mylesj/deep-entries/compare/v0.3.1...v0.3.2) (2019-02-25)
 
 ### Refactor

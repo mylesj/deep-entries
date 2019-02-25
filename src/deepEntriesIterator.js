@@ -1,10 +1,12 @@
+import { identity } from './utils'
 import { entriesIterator } from './entriesIterator'
 
-export function* deepEntriesIterator(input, mapFn = x => x) {
+export function* deepEntriesIterator(input, mapFn) {
+	const map = typeof mapFn === 'function' ? mapFn : identity
 	for (let [key, value] of entriesIterator(input)) {
-		if (typeof value !== 'object') yield mapFn([key, value])
+		if (typeof value !== 'object') yield map([key, value])
 		else
 			for (let entries of deepEntriesIterator(value))
-				yield mapFn([key, ...entries])
+				yield map([key, ...entries])
 	}
 }

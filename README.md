@@ -128,7 +128,7 @@ Array.from(input)
 
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/0.3.2
+[repo:examples]: https://runkit.com/mylesj/deep-entries/1.0.0
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
