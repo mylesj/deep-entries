@@ -3,5 +3,6 @@ Thumbs.db
 
 *.log
 
+test/coverage/
 node_modules/
 dist/

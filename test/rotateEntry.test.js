@@ -1,4 +1,4 @@
-const { rotateEntry } = require('..')
+import { rotateEntry } from '../src/rotateEntry'
 
 describe('rotateEntry', () => {
 	describe('should rotate the order of an entry by one and', () => {

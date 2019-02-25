@@ -1,0 +1,5 @@
+{
+	"preset": "rollup-jest",
+	"testEnvironment": "node",
+	"coverageDirectory": "./test/coverage/"
+}
