@@ -1,6 +1,6 @@
 {
 	"name": "deep-entries",
-	"version": "0.3.2",
+	"version": "1.0.0",
 	"description": "flatten nested object entries",
 	"author": "mylesj <hi@myles.ninja>",
 	"license": "ISC",
