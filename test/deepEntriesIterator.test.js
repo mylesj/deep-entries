@@ -2,14 +2,14 @@ import { deepEntriesIterator } from '../src/deepEntriesIterator'
 import { delimitEntry } from '../src/delimitEntry'
 
 describe('deepEntriesIterator', () => {
-	describe('input properties', () => {
+	describe('input attributes', () => {
 		it('should not return prototype members', () => {
 			const input = Object.assign(Object.create({ foo: true }), {
 				bar: true
 			})
 			const expected = [['bar', true]]
 			const actual = Array.from(deepEntriesIterator(input))
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 
 		it('should only return enumerable members', () => {
@@ -27,8 +27,25 @@ describe('deepEntriesIterator', () => {
 			)
 			const expected = [['foo', true]]
 			const actual = Array.from(deepEntriesIterator(input))
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
+	})
+
+	describe('should return an empty array for primitive input', () => {
+		;[
+			['Boolean', true],
+			['Null', null],
+			['Undefined', undefined],
+			['Number', 42],
+			['String', 'foobar'],
+			['Symbol', Symbol()]
+		].forEach(([descriptor, input]) =>
+			it(descriptor, () => {
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+		)
 	})
 
 	describe('should return an iterator that honours insertion order', () => {

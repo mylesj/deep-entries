@@ -17,7 +17,7 @@ describe('delimitEntryBy', () => {
 		const input = ['1', '2', '3', 4]
 		const expected = ['1:2:3', 4]
 		const actual = delimitEntryBy(':')(input)
-		expect(expected).toEqual(actual)
+		expect(actual).toEqual(expected)
 	})
 })
 
@@ -26,6 +26,6 @@ describe('delimitEntry', () => {
 		const input = ['1', '2', '3', 4]
 		const expected = ['1.2.3', 4]
 		const actual = delimitEntry(input)
-		expect(expected).toEqual(actual)
+		expect(actual).toEqual(expected)
 	})
 })

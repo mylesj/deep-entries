@@ -2,14 +2,14 @@ import { deepEntries } from '../src/deepEntries'
 import { delimitEntry } from '../src/delimitEntry'
 
 describe('deepEntries', () => {
-	describe('input properties', () => {
+	describe('input attributes', () => {
 		it('should not return prototype members', () => {
 			const input = Object.assign(Object.create({ foo: true }), {
 				bar: true
 			})
 			const expected = [['bar', true]]
 			const actual = deepEntries(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 
 		it('should only return enumerable members', () => {
@@ -27,11 +27,18 @@ describe('deepEntries', () => {
 			)
 			const expected = [['foo', true]]
 			const actual = deepEntries(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 	})
 
 	describe('default output', () => {
+		it('should return an empty array for primitive input', () => {
+			const input = [true, null, undefined, 42, 'string', Symbol()]
+			const expected = Array(6).fill([])
+			const actual = input.map(deepEntries)
+			expect(actual).toEqual(expected)
+		})
+
 		it('should return entries in insertion order', () => {
 			const input = {
 				a: 1,
@@ -44,7 +51,7 @@ describe('deepEntries', () => {
 				['c', 3]
 			]
 			const actual = deepEntries(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 
 		it('should return deep entries as variable-length arrays', () => {
@@ -73,7 +80,7 @@ describe('deepEntries', () => {
 				['d', 0]
 			]
 			const actual = deepEntries(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 
 		it('should handle array indices the same as object keys', () => {
@@ -100,7 +107,7 @@ describe('deepEntries', () => {
 				['c', '1', '2', 0]
 			]
 			const actual = deepEntries(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 	})
 
@@ -129,7 +136,7 @@ describe('deepEntries', () => {
 				['c.1.2', 0]
 			]
 			const actual = deepEntries(input, delimitEntry)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 	})
 })

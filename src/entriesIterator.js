@@ -1,4 +1,5 @@
 export function* entriesIterator(input) {
-	for (let key in input)
-		if (input.hasOwnProperty(key)) yield [key, input[key]]
+	if (typeof input === 'object')
+		for (let key in input)
+			if (input.hasOwnProperty(key)) yield [key, input[key]]
 }

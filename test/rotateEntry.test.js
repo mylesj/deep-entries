@@ -12,14 +12,14 @@ describe('rotateEntry', () => {
 			const input = ['1', 2]
 			const expected = [2, '1']
 			const actual = rotateEntry(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 
 		it('put the value first for variable-length entries', () => {
 			const input = ['1', '2', '3', 4]
 			const expected = [4, '1', '2', '3']
 			const actual = rotateEntry(input)
-			expect(expected).toEqual(actual)
+			expect(actual).toEqual(expected)
 		})
 	})
 })
