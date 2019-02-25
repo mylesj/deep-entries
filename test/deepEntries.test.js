@@ -29,6 +29,19 @@ describe('deepEntries', () => {
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
 		})
+
+		it('should ignore "mapFn" not of type "function"', () => {
+			const deepCollection = [
+				{ foo: 1 }, //
+				[1, 2]
+			]
+			const expected = [
+				[['foo', 1]], //
+				[['0', 1], ['1', 2]]
+			]
+			const actual = deepCollection.map(deepEntries)
+			expect(actual).toEqual(expected)
+		})
 	})
 
 	describe('default output', () => {
