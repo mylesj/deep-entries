@@ -1,4 +1,4 @@
-const { delimitEntryBy, delimitEntry } = require('..')
+import { delimitEntryBy, delimitEntry } from '../src/delimitEntry'
 
 describe('delimitEntryBy', () => {
 	it('should return a thunk', () => {

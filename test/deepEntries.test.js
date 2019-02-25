@@ -1,4 +1,5 @@
-const { deepEntries, delimitEntry } = require('..')
+import { deepEntries } from '../src/deepEntries'
+import { delimitEntry } from '../src/delimitEntry'
 
 describe('deepEntries', () => {
 	describe('input properties', () => {
