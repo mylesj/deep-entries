@@ -1,4 +1,4 @@
-import { identity } from './util'
+import { identity } from './utils'
 import { entriesIterator } from './entriesIterator'
 
 export function* deepEntriesIterator(input, mapFn) {
