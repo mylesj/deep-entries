@@ -1,4 +1,4 @@
-export { deepEntries } from './deepEntries'
-export { deepEntriesIterator } from './deepEntriesIterator'
-export { delimitEntry, delimitEntryBy } from './delimitEntry'
-export { rotateEntry } from './rotateEntry'
+export { deepEntries } from './deep-entries'
+export { deepEntriesIterator } from './deep-entries-iterator'
+export { delimitEntry, delimitEntryBy } from './delimit-entries'
+export { rotateEntry } from './rotate-entry'

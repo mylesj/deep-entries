@@ -1,5 +1,5 @@
-import { deepEntries } from '../src/deepEntries'
-import { delimitEntry } from '../src/delimitEntry'
+import { deepEntries } from '../src/deep-entries'
+import { delimitEntry } from '../src/delimit-entries'
 
 describe('deepEntries', () => {
 	describe('input attributes', () => {
