@@ -1,4 +1,4 @@
-import { delimitEntryBy, delimitEntry } from '../src/delimit-entries'
+import { delimitEntryBy, delimitEntry } from '../src/delimit-entry'
 
 describe('delimitEntryBy', () => {
 	it('should return a thunk', () => {
