@@ -1,5 +1,5 @@
 import { deepEntriesIterator } from '../src/deep-entries-iterator'
-import { delimitEntry } from '../src/delimit-entries'
+import { delimitEntry } from '../src/delimit-entry'
 
 describe('deepEntriesIterator', () => {
 	describe('input attributes', () => {
