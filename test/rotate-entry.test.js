@@ -1,4 +1,4 @@
-import { rotateEntry } from '../src/rotateEntry'
+import { rotateEntry } from '../src/rotate-entry'
 
 describe('rotateEntry', () => {
 	describe('should rotate the order of an entry by one and', () => {

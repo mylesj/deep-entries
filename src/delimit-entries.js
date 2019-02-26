@@ -1,4 +1,4 @@
-import { rotateEntry } from './rotateEntry'
+import { rotateEntry } from './rotate-entry'
 
 export const delimitEntryBy = delimiter => entry => {
 	const [value, ...keys] = rotateEntry(entry)

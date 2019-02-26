@@ -1,5 +1,5 @@
 import { identity } from './utils'
-import { entriesIterator } from './entriesIterator'
+import { entriesIterator } from './entries-iterator'
 
 export function* deepEntriesIterator(input, mapFn) {
 	const map = typeof mapFn === 'function' ? mapFn : identity
