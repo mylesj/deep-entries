@@ -10,7 +10,7 @@ describe('delimitEntryBy', () => {
 	it('should always return a new object reference', () => {
 		const input = ['1', 2]
 		const actual = delimitEntryBy()(input)
-		expect(input).not.toBe(actual)
+		expect(actual).not.toBe(input)
 	})
 
 	it('should concatenate keys with the specified delimiter', () => {
