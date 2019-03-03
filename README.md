@@ -128,12 +128,12 @@ Array.from(input)
 
 ### filtering
 
-The map functions passed to `deepEntries()` and `deepEntriesIterator()` can effectively filter entries
-by not returning them - _i.e._ returning `undefined`.
+The map functions passed to `deepEntries()` and `deepEntriesIterator()` can effectively filter out
+entries by not returning them - _i.e._ returning `undefined`.
 
 ```js
-const { last: getEntryValue } = require('ramda')
-deepEntries(input, entry => (getEntryValue(entry) > 3 ? entry : undefined))
+const { last: getValue } = require('ramda')
+deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // [
 //     [ 'baz', '1', '0', 4 ],
 //     [ 'baz', '1', '1', 5 ],
