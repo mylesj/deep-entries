@@ -1,6 +1,12 @@
 import { rotateEntryBy, rotateEntry } from '../src/rotate-entry'
 
 describe('rotateEntryBy', () => {
+	it('should return undefined if the input is undefined', () => {
+		const expected = undefined
+		const actual = rotateEntryBy(0)(undefined)
+		expect(actual).toBe(expected)
+	})
+
 	describe('when N is zero', () => {
 		it('always return a new object reference', () => {
 			const input = ['1', 2]
@@ -120,6 +126,12 @@ describe('rotateEntryBy', () => {
 })
 
 describe('rotateEntry', () => {
+	it('should return undefined if the input is undefined', () => {
+		const expected = undefined
+		const actual = rotateEntry(undefined)
+		expect(actual).toBe(expected)
+	})
+
 	describe('should rotate the order of an entry by one and', () => {
 		it('always return a new object reference', () => {
 			const input = ['1', 2]
