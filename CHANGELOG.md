@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [2.0.0](https://github.com/mylesj/deep-entries/compare/v1.0.0...v2.0.0) (2019-03-03)
+
+### Features
+
+-   **iterator:** filters entries when map function returns undefined ([2ed8e9e](https://github.com/mylesj/deep-entries/commit/2ed8e9e))
+
+### BREAKING CHANGES
+
+-   **iterator:** in deepEntries() & deepEntriesIterator(), yield now ignores entries where a transform has returned undefined - effectively allowing entries to be filtered
+
 # [1.0.0](https://github.com/mylesj/deep-entries/compare/v0.3.2...v1.0.0) (2019-02-25)
 
 ### Bug Fixes
