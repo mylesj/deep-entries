@@ -193,4 +193,43 @@ describe('deepEntriesIterator', () => {
 			expect(step.value).toBe(undefined)
 		})
 	})
+
+	describe('should ignore entries where a transform returns "undefined"', () => {
+		const input = {
+			start: true,
+			a: undefined,
+			b: [undefined],
+			c: {
+				[1]: [
+					undefined,
+					{
+						[1]: undefined,
+						[2]: undefined
+					},
+					undefined
+				]
+			},
+			finish: true
+		}
+		const iterator = deepEntriesIterator(input, entry =>
+			entry.slice(-1).pop() !== undefined ? entry : undefined
+		)
+		let step
+		;[
+			['start', true], //
+			['finish', true]
+		].forEach(expected =>
+			it(`[${expected.join(', ')}]`, () => {
+				step = iterator.next()
+				expect(step.done).toBe(false)
+				expect(expected).toEqual(step.value)
+			})
+		)
+
+		it(`-> complete`, () => {
+			step = iterator.next()
+			expect(step.done).toBe(true)
+			expect(step.value).toBe(undefined)
+		})
+	})
 })
