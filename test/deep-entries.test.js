@@ -150,4 +150,31 @@ describe('deepEntries', () => {
 			expect(actual).toEqual(expected)
 		})
 	})
+
+	it('should ignore entries where a transform returns "undefined"', () => {
+		const input = {
+			start: true,
+			a: undefined,
+			b: [undefined],
+			c: {
+				[1]: [
+					undefined,
+					{
+						[1]: undefined,
+						[2]: undefined
+					},
+					undefined
+				]
+			},
+			finish: true
+		}
+		const expected = [
+			['start', true], //
+			['finish', true]
+		]
+		const actual = deepEntries(input, entry =>
+			entry.slice(-1).pop() !== undefined ? entry : undefined
+		)
+		expect(actual).toEqual(expected)
+	})
 })
