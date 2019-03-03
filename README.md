@@ -126,9 +126,24 @@ Array.from(input)
 // ]
 ```
 
+### filtering
+
+The map functions passed to `deepEntries()` and `deepEntriesIterator()` can effectively filter entries
+by not returning them - _i.e._ returning `undefined`.
+
+```js
+const { last } = require('ramda')
+deepEntries(input, entry => (last(entry) > 3 ? entry : undefined))
+// [
+//     [ 'baz', '1', '0', 4 ],
+//     [ 'baz', '1', '1', 5 ],
+//     [ 'baz', '2', 'key', 6 ]
+// ]
+```
+
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/1.0.0
+[repo:examples]: https://runkit.com/mylesj/deep-entries/2.0.0
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
