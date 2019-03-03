@@ -11,16 +11,28 @@ A utility for returning deeply nested key-values as tuples of varying length.
 
 ## exposes
 
+### core functions
+
 -   **deepEntries**  
     => ( input: _Object | Array_, map?: _function_ ): _Array[]_
 -   **deepEntriesIterator**  
     => ( input: _Object | Array_, map?: _function_ ): _Iterator_
+
+### map functions
+
 -   **delimitEntryBy**  
     => ( input: _string_ ): _function_
 -   **delimitEntry**  
     => ( input: _Array_ ): _Array_
+-   **rotateEntryBy**  
+     => ( input: _integer_ ): _function_
 -   **rotateEntry**  
     => ( input: _Array_ ): _Array_
+
+### observations
+
+-   `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
+-   `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
 
 ## examples
 
@@ -33,6 +45,7 @@ const {
 	deepEntries,
 	deepEntriesIterator,
 	delimitEntryBy,
+	rotateEntryBy,
 	delimitEntry,
 	rotateEntry
 } = require('deep-entries')
@@ -60,7 +73,7 @@ const input = {
 }
 ```
 
-`deepEntries()` will return nested entries as a variable-length array with the value trailing.
+`deepEntries()` will return nested entries as arrays of varying length, with the value always trailing.
 
 ```js
 deepEntries(input)
@@ -76,8 +89,6 @@ deepEntries(input)
 
 `deepEntries()` will accept an optional map function as a second parameter.
 
--   Note that `delimitEntry` is equivalent to `delimitEntryBy('.')`
-
 ```js
 deepEntries(input, delimitEntry)
 // [
@@ -90,8 +101,8 @@ deepEntries(input, delimitEntry)
 // ]
 ```
 
-`deepEntries()` is a shorthand call that collects all entries from a `deepEntriesIterator()`, which is
-exposed separately to aid in performant iteration of larger structures. The `rotateEntry()` map
+`deepEntries()` is an alias that collects all entries from a `deepEntriesIterator()`, which is
+also exposed to aid in performant iteration of larger structures. The `rotateEntry` map
 function rotates the entry array by `1` (_i.e._ putting the value first), allowing for more convenient
 destructuring of an entry.
 
