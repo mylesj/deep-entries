@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.1.2](https://github.com/mylesj/deep-entries/compare/v2.1.1...v2.1.2) (2019-03-03)
 
+### Docs
+
+-   fix typos
+
 ## [2.1.1](https://github.com/mylesj/deep-entries/compare/v2.1.0...v2.1.1) (2019-03-03)
 
 ### Bug Fixes
