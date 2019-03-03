@@ -132,8 +132,8 @@ The map functions passed to `deepEntries()` and `deepEntriesIterator()` can effe
 by not returning them - _i.e._ returning `undefined`.
 
 ```js
-const { last } = require('ramda')
-deepEntries(input, entry => (last(entry) > 3 ? entry : undefined))
+const { last: getEntryValue } = require('ramda')
+deepEntries(input, entry => (getEntryValue(entry) > 3 ? entry : undefined))
 // [
 //     [ 'baz', '1', '0', 4 ],
 //     [ 'baz', '1', '1', 5 ],
