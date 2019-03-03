@@ -152,9 +152,29 @@ deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // ]
 ```
 
+The map functions provided follow a patter of returning `undefined` if passed `undefined` such that
+they may be composed with filters, without throwing errors.
+
+```js
+const { pipe } = require('ramda')
+const atDepth = n => entry => {
+	if (entry.length === 2 + n) return entry
+}
+deepEntries(
+	input,
+	pipe(
+		atDepth(1),
+		delimitEntry
+	)
+)
+// [
+//     [ 'baz.0', 3 ]
+// ]
+```
+
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/2.0.0
+[repo:examples]: https://runkit.com/mylesj/deep-entries/2.1.1
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
