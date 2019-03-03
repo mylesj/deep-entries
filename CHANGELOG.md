@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [2.0.1](https://github.com/mylesj/deep-entries/compare/v2.0.0...v2.0.1) (2019-03-03)
 
+### Docs
+
+-   tweaks to readme & runkit examples
+
 # [2.0.0](https://github.com/mylesj/deep-entries/compare/v1.0.0...v2.0.0) (2019-03-03)
 
 ### Features
