@@ -45,16 +45,6 @@ describe('deepEntriesIterator', () => {
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})
-
-		it('legacy support for array entries should behave the same as Array.entries()', () => {
-			const input = Object.assign([1, , 3], {
-				foo: true,
-				entries: false
-			})
-			const expected = [[0, 1], [1, undefined], [2, 3]]
-			const actual = Array.from(deepEntriesIterator(input))
-			expect(actual).toEqual(expected)
-		})
 	})
 
 	describe('should return an empty array for primitive input', () => {

@@ -58,16 +58,6 @@ describe('deepEntries', () => {
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
 		})
-
-		it('legacy support for array entries should behave the same as Array.entries()', () => {
-			const input = Object.assign([1, , 3], {
-				foo: true,
-				entries: false
-			})
-			const expected = [[0, 1], [1, undefined], [2, 3]]
-			const actual = deepEntries(input)
-			expect(actual).toEqual(expected)
-		})
 	})
 
 	describe('output', () => {
