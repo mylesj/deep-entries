@@ -37,9 +37,35 @@ describe('deepEntries', () => {
 			]
 			const expected = [
 				[['foo', 1]], //
-				[['0', 1], ['1', 2]]
+				[[0, 1], [1, 2]]
 			]
 			const actual = deepCollection.map(deepEntries)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should not return non-numeric members of arrays', () => {
+			const input = Object.assign([1, 2], {
+				foo: true
+			})
+			const expected = [[0, 1], [1, 2]]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return undefined entries of sparse arrays', () => {
+			const input = [1, , 3]
+			const expected = [[0, 1], [1, undefined], [2, 3]]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('legacy support for array entries should behave the same as Array.entries()', () => {
+			const input = Object.assign([1, , 3], {
+				foo: true,
+				entries: false
+			})
+			const expected = [[0, 1], [1, undefined], [2, 3]]
+			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
 		})
 	})
@@ -96,7 +122,7 @@ describe('deepEntries', () => {
 			expect(actual).toEqual(expected)
 		})
 
-		it('should handle array indices the same as object keys', () => {
+		it('should handle array indices the same as object keys, preserving type', () => {
 			const input = {
 				a: 0,
 				b: [0],
@@ -113,11 +139,11 @@ describe('deepEntries', () => {
 			}
 			const expected = [
 				['a', 0],
-				['b', '0', 0],
-				['c', '1', '0', 0],
-				['c', '1', '1', '1', 0],
-				['c', '1', '1', '2', 0],
-				['c', '1', '2', 0]
+				['b', 0, 0],
+				['c', '1', 0, 0],
+				['c', '1', 1, '1', 0],
+				['c', '1', 1, '2', 0],
+				['c', '1', 2, 0]
 			]
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
