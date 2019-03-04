@@ -152,7 +152,7 @@ deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // ]
 ```
 
-The map function follow a pattern of returning `undefined` if passed `undefined` such that
+The map functions follow a pattern of returning `undefined` if passed `undefined` such that
 they may be composed with filters, without throwing errors.
 
 ```js
