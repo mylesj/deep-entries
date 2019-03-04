@@ -5,9 +5,11 @@
 
 # deep-entries
 
--   Comparable to: [`Object.entries()`][ext:object.entries]
-
 A utility for returning deeply nested key-values as tuples of varying length.
+
+-   Comparable to:
+    -   [`Object.entries()`][ext:object.entries]
+    -   [`Array.prototype.entries()`][ext:array.entries]
 
 ## exposes
 
@@ -80,10 +82,10 @@ deepEntries(input)
 // [
 //     [ 'foo', 1 ],
 //     [ 'bar', 'deep', 'key', 2 ],
-//     [ 'baz', '0', 3 ],
-//     [ 'baz', '1', '0', 4 ],
-//     [ 'baz', '1', '1', 5 ],
-//     [ 'baz', '2', 'key', 6 ]
+//     [ 'baz', 0, 3 ],
+//     [ 'baz', 1, 0, 4 ],
+//     [ 'baz', 1, 1, 5 ],
+//     [ 'baz', 2, 'key', 6 ]
 // ]
 ```
 
@@ -112,10 +114,10 @@ for (let [value, ...keys] of deepEntriesIterator(input, rotateEntry)) {
 }
 // [ 'foo' ] 1
 // [ 'bar', 'deep', 'key' ] 2
-// [ 'baz', '0' ] 3
-// [ 'baz', '1', '0' ] 4
-// [ 'baz', '1', '1' ] 5
-// [ 'baz', '2', 'key' ] 6
+// [ 'baz', 0 ] 3
+// [ 'baz', 1, 0 ] 4
+// [ 'baz', 1, 1 ] 5
+// [ 'baz', 2, 'key' ] 6
 ```
 
 It's worth noting that objects can have assigned iterators too.
@@ -146,9 +148,9 @@ entries by not returning them - _i.e._ returning `undefined`.
 const { last: getValue } = require('ramda')
 deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // [
-//     [ 'baz', '1', '0', 4 ],
-//     [ 'baz', '1', '1', 5 ],
-//     [ 'baz', '2', 'key', 6 ]
+//     [ 'baz', 1, 0, 4 ],
+//     [ 'baz', 1, 1, 5 ],
+//     [ 'baz', 2, 'key', 6 ]
 // ]
 ```
 
@@ -176,6 +178,7 @@ deepEntries(
 [repo:package]: https://www.npmjs.com/package/deep-entries
 [repo:examples]: https://runkit.com/mylesj/deep-entries/2.1.1
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
+[ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
 [ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
 [img:repo-status]: https://travis-ci.org/mylesj/deep-entries.svg?branch=master
