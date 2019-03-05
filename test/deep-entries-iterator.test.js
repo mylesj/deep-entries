@@ -29,22 +29,6 @@ describe('deepEntriesIterator', () => {
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})
-
-		it('should not return non-numeric members of arrays', () => {
-			const input = Object.assign([1, 2], {
-				foo: true
-			})
-			const expected = [[0, 1], [1, 2]]
-			const actual = Array.from(deepEntriesIterator(input))
-			expect(actual).toEqual(expected)
-		})
-
-		it('should return undefined entries of sparse arrays', () => {
-			const input = [1, , 3]
-			const expected = [[0, 1], [1, undefined], [2, 3]]
-			const actual = Array.from(deepEntriesIterator(input))
-			expect(actual).toEqual(expected)
-		})
 	})
 
 	describe('should return an empty array for primitive input', () => {
@@ -168,6 +152,109 @@ describe('deepEntriesIterator', () => {
 			step = iterator.next()
 			expect(step.done).toBe(true)
 			expect(step.value).toBe(undefined)
+		})
+	})
+
+	describe('array members', () => {
+		it('should not return non-numeric members of arrays', () => {
+			const input = Object.assign([1, 2], {
+				foo: true
+			})
+			const expected = [[0, 1], [1, 2]]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return undefined entries of sparse arrays', () => {
+			const input = [1, , 3]
+			const expected = [[0, 1], [1, undefined], [2, 3]]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
+	describe('input type Map', () => {
+		it('should return entries, ignoring object members', () => {
+			const input = Object.assign(
+				new Map([[1, true], [{ 2: true }, true], ['foo', true]]),
+				{
+					bar: true
+				}
+			)
+			const expected = [[1, true], [{ 2: true }, true], ['foo', true]]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				value: new Map([
+					[true, { foo: 0 }],
+					[false, { foo: 0 }],
+					[true, new Map([[false, { bar: 0, baz: 0 }]])]
+				])
+			}
+			const expected = [
+				['value', true, false, 'bar', 0],
+				['value', true, false, 'baz', 0],
+				['value', false, 'foo', 0]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
+	describe('input type Set', () => {
+		it('should return entries, ignore object members', () => {
+			const input = Object.assign(new Set([1, 'a', { foo: true }]), {
+				bar: true
+			})
+			const expected = [[1, 1], ['a', 'a'], [{ foo: true }, 'foo', true]]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				value: new Set([
+					1,
+					'two',
+					{
+						[3]: 1
+					},
+					{
+						[3]: 2
+					},
+					new Set([
+						{
+							[4]: 0,
+							[5]: 0
+						}
+					])
+				])
+			}
+			const expected = [
+				['value', 1, 1],
+				['value', 'two', 'two'],
+				['value', { [3]: 1 }, '3', 1],
+				['value', { [3]: 2 }, '3', 2],
+				[
+					'value',
+					new Set([{ [4]: 0, [5]: 0 }]),
+					{ [4]: 0, [5]: 0 },
+					'4',
+					0
+				],
+				[
+					'value',
+					new Set([{ [4]: 0, [5]: 0 }]),
+					{ [4]: 0, [5]: 0 },
+					'5',
+					0
+				]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
 		})
 	})
 
