@@ -206,10 +206,21 @@ describe('deepEntriesIterator', () => {
 
 	describe('input type Set', () => {
 		it('should return entries, ignore object members', () => {
-			const input = Object.assign(new Set([1, 'a', { foo: true }]), {
-				bar: true
-			})
-			const expected = [[1, 1], ['a', 'a'], [{ foo: true }, 'foo', true]]
+			const input = Object.assign(
+				new Set([
+					1, //
+					'a', //
+					{ foo: true }
+				]),
+				{
+					bar: true
+				}
+			)
+			const expected = [
+				[0, 1], //
+				[1, 'a'], //
+				[2, 'foo', true]
+			]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})
@@ -234,24 +245,12 @@ describe('deepEntriesIterator', () => {
 				])
 			}
 			const expected = [
-				['value', 1, 1],
-				['value', 'two', 'two'],
-				['value', { [3]: 1 }, '3', 1],
-				['value', { [3]: 2 }, '3', 2],
-				[
-					'value',
-					new Set([{ [4]: 0, [5]: 0 }]),
-					{ [4]: 0, [5]: 0 },
-					'4',
-					0
-				],
-				[
-					'value',
-					new Set([{ [4]: 0, [5]: 0 }]),
-					{ [4]: 0, [5]: 0 },
-					'5',
-					0
-				]
+				['value', 0, 1],
+				['value', 1, 'two'],
+				['value', 2, '3', 1],
+				['value', 3, '3', 2],
+				['value', 4, 0, '4', 0],
+				['value', 4, 0, '5', 0]
 			]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)

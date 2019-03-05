@@ -33,6 +33,7 @@ A utility for returning deeply nested key-values as tuples of varying length.
 
 ### observations
 
+-   instances of `Set` will be converted to arrays
 -   `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
 -   `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
 

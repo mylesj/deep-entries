@@ -188,12 +188,12 @@ describe('deepEntries', () => {
 				}
 			)
 			const expected = [
-				[1, 1],
-				['a', 'a'],
-				[{ [3]: 1 }, '3', 1],
-				[{ [3]: 1 }, '3', 1],
-				[new Set([{ [4]: 0, [5]: 0 }]), { [4]: 0, [5]: 0 }, '4', 0],
-				[new Set([{ [4]: 0, [5]: 0 }]), { [4]: 0, [5]: 0 }, '5', 0]
+				[0, 1],
+				[1, 'a'],
+				[2, '3', 1],
+				[3, '3', 1],
+				[4, 0, '4', 0],
+				[4, 0, '5', 0]
 			]
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
