@@ -42,22 +42,6 @@ describe('deepEntries', () => {
 			const actual = deepCollection.map(deepEntries)
 			expect(actual).toEqual(expected)
 		})
-
-		it('should not return non-numeric members of arrays', () => {
-			const input = Object.assign([1, 2], {
-				foo: true
-			})
-			const expected = [[0, 1], [1, 2]]
-			const actual = deepEntries(input)
-			expect(actual).toEqual(expected)
-		})
-
-		it('should return undefined entries of sparse arrays', () => {
-			const input = [1, , 3]
-			const expected = [[0, 1], [1, undefined], [2, 3]]
-			const actual = deepEntries(input)
-			expect(actual).toEqual(expected)
-		})
 	})
 
 	describe('output', () => {
@@ -134,6 +118,82 @@ describe('deepEntries', () => {
 				['c', '1', 1, '1', 0],
 				['c', '1', 1, '2', 0],
 				['c', '1', 2, 0]
+			]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should not return non-numeric members of arrays', () => {
+			const input = Object.assign([1, 2], {
+				foo: true
+			})
+			const expected = [[0, 1], [1, 2]]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return undefined entries of sparse arrays', () => {
+			const input = [1, , 3]
+			const expected = [[0, 1], [1, undefined], [2, 3]]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return entries for objects of type Map', () => {
+			const input = Object.assign(
+				new Map([
+					[1, true],
+					[{ 2: true }, true],
+					['foo', true],
+					[true, { foo: 0 }],
+					[false, { foo: 0 }],
+					[true, new Map([[false, { bar: 0, baz: 0 }]])]
+				]),
+				{
+					bar: true
+				}
+			)
+			const expected = [
+				[1, true],
+				[{ 2: true }, true],
+				['foo', true],
+				[true, false, 'bar', 0],
+				[true, false, 'baz', 0],
+				[false, 'foo', 0]
+			]
+			const actual = deepEntries(input)
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return entries for objects of type Set', () => {
+			const input = Object.assign(
+				new Set([
+					1,
+					'a',
+					{
+						[3]: 1
+					},
+					{
+						[3]: 1
+					},
+					new Set([
+						{
+							[4]: 0,
+							[5]: 0
+						}
+					])
+				]),
+				{
+					bar: true
+				}
+			)
+			const expected = [
+				[1, 1],
+				['a', 'a'],
+				[{ [3]: 1 }, '3', 1],
+				[{ [3]: 1 }, '3', 1],
+				[new Set([{ [4]: 0, [5]: 0 }]), { [4]: 0, [5]: 0 }, '4', 0],
+				[new Set([{ [4]: 0, [5]: 0 }]), { [4]: 0, [5]: 0 }, '5', 0]
 			]
 			const actual = deepEntries(input)
 			expect(actual).toEqual(expected)
