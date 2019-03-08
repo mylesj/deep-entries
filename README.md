@@ -34,6 +34,8 @@ A utility for returning deeply nested key-values as tuples of varying length.
 ### observations
 
 -   instances of `Set` will be converted to arrays
+-   instances of `Map` will yield `Map.prototype.entries()`  
+    (limited support / usefulness TBD)
 -   `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
 -   `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
 
@@ -177,7 +179,7 @@ deepEntries(
 
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/2.1.1
+[repo:examples]: https://runkit.com/mylesj/deep-entries/3.0.0
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
 [ext:commits]: https://conventionalcommits.org
