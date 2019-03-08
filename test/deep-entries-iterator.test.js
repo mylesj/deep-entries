@@ -167,7 +167,11 @@ describe('deepEntriesIterator', () => {
 
 		it('should return undefined entries of sparse arrays', () => {
 			const input = [1, , 3]
-			const expected = [[0, 1], [1, undefined], [2, 3]]
+			const expected = [
+				[0, 1], //
+				[1, undefined], //
+				[2, 3]
+			]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})
@@ -181,7 +185,11 @@ describe('deepEntriesIterator', () => {
 					bar: true
 				}
 			)
-			const expected = [[1, true], [{ 2: true }, true], ['foo', true]]
+			const expected = [
+				[1, true], //
+				[{ 2: true }, true], //
+				['foo', true]
+			]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})
