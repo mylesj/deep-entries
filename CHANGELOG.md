@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [3.0.0](https://github.com/mylesj/deep-entries/compare/v2.1.2...v3.0.0) (2019-03-08)
+
+### Bug Fixes
+
+-   Set / Map cross-window support ([5fdc4b3](https://github.com/mylesj/deep-entries/commit/5fdc4b3))
+
+### Features
+
+-   limited support for Map & Set entries ([145e7f5](https://github.com/mylesj/deep-entries/commit/145e7f5))
+-   numeric array indices are preserved - close [#11](https://github.com/mylesj/deep-entries/issues/11) ([595a2ec](https://github.com/mylesj/deep-entries/commit/595a2ec))
+-   Set instances will be treated as arrays - close [#13](https://github.com/mylesj/deep-entries/issues/13) ([8318389](https://github.com/mylesj/deep-entries/commit/8318389))
+
+### BREAKING CHANGES
+
+-   Map & Set will no longer return empty entries
+-   non-numeric array members are ignored
+
 ## [2.1.2](https://github.com/mylesj/deep-entries/compare/v2.1.1...v2.1.2) (2019-03-03)
 
 ### Docs
