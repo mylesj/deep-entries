@@ -179,7 +179,7 @@ deepEntries(
 
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/3.0.0
+[repo:examples]: https://runkit.com/mylesj/deep-entries/3.0.1
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
 [ext:commits]: https://conventionalcommits.org
