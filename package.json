@@ -46,7 +46,7 @@
 	"devDependencies": {
 		"git-scripts": "^0.2.1",
 		"jest": "^24.8.0",
-		"lint-staged": "^8.2.1",
+		"lint-staged": "^9.2.0",
 		"prettier": "^1.18.2",
 		"rimraf": "^2.6.3",
 		"rollup": "^1.15.5",
