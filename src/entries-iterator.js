@@ -12,8 +12,11 @@ export function* entriesIterator(input) {
 			break
 
 		case '[object Object]':
-			for (let key in input)
-				if (input.hasOwnProperty(key)) yield [key, input[key]]
+		default:
+			if (typeof input === 'object')
+				for (let key in input)
+					if (Object.prototype.hasOwnProperty.call(input, key))
+						yield [key, input[key]]
 			break
 	}
 }
