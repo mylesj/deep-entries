@@ -253,4 +253,62 @@ describe('deepEntries', () => {
 		)
 		expect(actual).toEqual(expected)
 	})
+
+	describe('circular references', () => {
+		it('should ignore references', () => {
+			const input = { a: 1 }
+			input.b = input
+
+			const expected = [['a', 1]]
+			const actual = deepEntries(input)
+
+			expect(actual).toEqual(expected)
+		})
+
+		it('should ignore deeply nested references', () => {
+			const input = { a: 1, b: { c: 1 } }
+			input.b.ref = input
+
+			const expected = [['a', 1], ['b', 'c', 1]]
+			const actual = deepEntries(input)
+
+			expect(actual).toEqual(expected)
+		})
+
+		it('should ignore deep-referenced references', () => {
+			const input = { a: 1, b: { c: { d: 1 } } }
+			input.b.c.ref = input.b
+
+			const expected = [['a', 1], ['b', 'c', 'd', 1]]
+			const actual = deepEntries(input)
+
+			expect(actual).toEqual(expected)
+		})
+
+		it('should handle crossed references', () => {
+			const input = { a: { b: 1 }, c: { d: 2 } }
+			input.a.e = input.c
+			input.c.f = input.a
+
+			const expected = [
+				['a', 'b', 1],
+				['a', 'e', 'd', 2],
+				['c', 'd', 2],
+				['c', 'f', 'b', 1]
+			]
+			const actual = deepEntries(input)
+
+			expect(actual).toEqual(expected)
+		})
+
+		it('should handle sibling references', () => {
+			const input = { a: [{ b: 1 }] }
+			input.a.push(input.a[0])
+
+			const expected = [['a', 0, 'b', 1], ['a', 1, 'b', 1]]
+			const actual = deepEntries(input)
+
+			expect(actual).toEqual(expected)
+		})
+	})
 })
