@@ -1,6 +1,13 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.1.0](https://github.com/mylesj/deep-entries/compare/v3.0.2...v3.1.0) (2019-07-21)
+
+### Features
+
+-   **iterator:** ignore circular references - fix [#19](https://github.com/mylesj/deep-entries/issues/19) ([875ea7f](https://github.com/mylesj/deep-entries/commit/875ea7f))
+-   **iterator:** more permissive towards object types ([196d303](https://github.com/mylesj/deep-entries/commit/196d303))
 
 ## [3.0.2](https://github.com/mylesj/deep-entries/compare/v3.0.1...v3.0.2) (2019-03-10)
 
