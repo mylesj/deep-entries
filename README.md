@@ -33,6 +33,7 @@ A utility for returning deeply nested key-values as tuples of varying length.
 
 ### observations
 
+-   ignores circular references
 -   instances of `Set` will be converted to arrays
 -   instances of `Map` will yield `Map.prototype.entries()`  
     (limited support / usefulness TBD)
