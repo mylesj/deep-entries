@@ -32,9 +32,9 @@
 		"prerelease": "npm run build && npm run test",
 		"release": "standard-version --commit-all"
 	},
-	"git": {
-		"scripts": {
-			"pre-commit": "node_modules/.bin/lint-staged"
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
 		}
 	},
 	"lint-staged": {
@@ -44,7 +44,7 @@
 		]
 	},
 	"devDependencies": {
-		"git-scripts": "^0.2.1",
+		"husky": "^3.0.7",
 		"jest": "^24.8.0",
 		"lint-staged": "^9.2.0",
 		"prettier": "^1.18.2",
