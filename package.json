@@ -44,14 +44,14 @@
 		]
 	},
 	"devDependencies": {
-		"husky": "^3.0.7",
-		"jest": "^24.9.0",
-		"lint-staged": "^9.4.0",
+		"husky": "^4.2.5",
+		"jest": "^26.0.1",
+		"lint-staged": "^10.2.6",
 		"prettier": "*",
-		"rimraf": "^3.0.0",
-		"rollup": "^1.22.0",
+		"rimraf": "^3.0.2",
+		"rollup": "^2.10.8",
 		"rollup-jest": "^0.0.2",
-		"standard-version": "^7.0.0"
+		"standard-version": "^8.0.0"
 	},
 	"dependencies": {}
 }
