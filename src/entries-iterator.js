@@ -1,3 +1,5 @@
+import { isObjectLike } from './utils'
+
 export function* entriesIterator(input) {
 	switch (Object.prototype.toString.call(input)) {
 		case '[object Array]':
@@ -13,7 +15,7 @@ export function* entriesIterator(input) {
 
 		case '[object Object]':
 		default:
-			if (typeof input === 'object')
+			if (isObjectLike(input))
 				for (let key in input)
 					if (Object.prototype.hasOwnProperty.call(input, key))
 						yield [key, input[key]]

@@ -213,7 +213,7 @@ describe('deepEntriesIterator', () => {
 	})
 
 	describe('input type Set', () => {
-		it('should return entries, ignore object members', () => {
+		it('should return entries, ignoring object members', () => {
 			const input = Object.assign(
 				new Set([
 					1, //
@@ -259,6 +259,72 @@ describe('deepEntriesIterator', () => {
 				['value', 3, '3', 2],
 				['value', 4, 0, '4', 0],
 				['value', 4, 0, '5', 0]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
+	describe('not-normally-enumerated builtin object', () => {
+		describe('it should return empty, ignoring object members', () => {
+			it('when regex', () => {
+				const input = Object.assign(/foo/, {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when date', () => {
+				const input = Object.assign(new Date(), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed number', () => {
+				const input = Object.assign(new Number(1), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed boolean', () => {
+				const input = Object.assign(new Boolean(true), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed string (builtin iterator)', () => {
+				const input = new String('foo')
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				regex: /foo/,
+				date: new Date(),
+				boxedNumber: new Number(1),
+				boxedBoolean: new Boolean(true),
+				boxedString: new String('foo')
+			}
+			const expected = [
+				['regex', input.regex],
+				['date', input.date],
+				['boxedNumber', input.boxedNumber],
+				['boxedBoolean', input.boxedBoolean],
+				['boxedString', input.boxedString]
 			]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
