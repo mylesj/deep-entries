@@ -48,6 +48,28 @@ describe('deepEntriesIterator', () => {
 		)
 	})
 
+	describe('deep nested "empty" input', () => {
+		it('should return null entries', () => {
+			const input = [null, [null]]
+			const expected = [
+				[0, null], //
+				[1, 0, null]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return undefined entries', () => {
+			const input = [undefined, [undefined]]
+			const expected = [
+				[0, undefined], //
+				[1, 0, undefined]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
 	describe('should return an iterator that honours insertion order', () => {
 		const input = {
 			a: 1,
