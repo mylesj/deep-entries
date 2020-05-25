@@ -1,19 +1,31 @@
-import { isObjectLike } from './utils'
+import { getInterface, isObjectLike } from './utils'
 
 export function* entriesIterator(input) {
-	switch (Object.prototype.toString.call(input)) {
-		case '[object Array]':
-		case '[object Map]':
-		case '[object URLSearchParams]':
+	switch (getInterface(input)) {
+		case 'Array':
+		case 'Map':
+		case 'URLSearchParam':
 			yield* input.entries()
 			break
 
-		case '[object Set]':
+		case 'Set':
+		case 'NodeList':
+		case 'Int8Array':
+		case 'Uint8Array':
+		case 'Uint8ClampedArray':
+		case 'Int16Array':
+		case 'Uint16Array':
+		case 'Int32Array':
+		case 'Uint32Array':
+		case 'Float32Array':
+		case 'Float64Array':
+		case 'BigInt64Array':
+		case 'BigUint64Array':
 			let i = 0
 			for (let value of input) yield [i++, value]
 			break
 
-		case '[object Object]':
+		case 'Object':
 		default:
 			if (isObjectLike(input))
 				for (let key in input)

@@ -177,6 +177,32 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
+	describe('array-like members', () => {
+		describe('should consistently index typed-arrays by number', () => {
+			;[
+				Int8Array,
+				Uint8Array,
+				Uint8ClampedArray,
+				Int16Array,
+				Uint16Array,
+				Int32Array,
+				Uint32Array,
+				Float32Array,
+				Float64Array,
+				BigInt64Array,
+				BigUint64Array
+			].forEach(I =>
+				it(I.name, () => {
+					const n = I.name.startsWith('Big') ? 0n : 0
+					const input = I.from([n])
+					const expected = [[0, n]]
+					const actual = Array.from(deepEntriesIterator(input))
+					expect(actual).toEqual(expected)
+				})
+			)
+		})
+	})
+
 	describe('input type Map', () => {
 		it('should return entries, ignoring object members', () => {
 			const input = Object.assign(

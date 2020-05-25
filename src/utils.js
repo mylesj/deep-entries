@@ -1,12 +1,17 @@
 export const identity = x => x
 
+export const getInterface = x => {
+	const str = Object.prototype.toString.call(x)
+	return str.substring(8, str.length - 1) // [object ...]
+}
+
 export const isObjectLike = x => {
-	switch (Object.prototype.toString.call(x)) {
-		case '[object String]':
-		case '[object Number]':
-		case '[object Boolean]':
-		case '[object RegExp]':
-		case '[object Date]':
+	switch (getInterface(x)) {
+		case 'String':
+		case 'Number':
+		case 'Boolean':
+		case 'RegExp':
+		case 'Date':
 			return false
 
 		default:
