@@ -260,6 +260,29 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
+	describe('input type URLSearchParams', () => {
+		it('should return entries, ignoring object members', () => {
+			const input = Object.assign(new URLSearchParams({ foo: true }), {
+				bar: true
+			})
+			const expected = [['foo', 'true']]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				value: new URLSearchParams({ foo: true, bar: false })
+			}
+			const expected = [
+				['value', 'foo', 'true'],
+				['value', 'bar', 'false']
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
 	describe('input type Set', () => {
 		it('should return entries, ignoring object members', () => {
 			const input = Object.assign(
