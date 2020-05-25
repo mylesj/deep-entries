@@ -6,7 +6,8 @@ export const getInterface = x => {
 }
 
 export const isObjectLike = x => {
-	switch (getInterface(x)) {
+	const tag = getInterface(x)
+	switch (tag) {
 		case 'String':
 		case 'Number':
 		case 'Boolean':
@@ -15,6 +16,10 @@ export const isObjectLike = x => {
 			return false
 
 		default:
+			if (tag.startsWith('HTML')) {
+				return false
+			}
+
 			return typeof x === 'object'
 	}
 }

@@ -357,6 +357,53 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
+	describe('DOM elements', () => {
+		const mockElement = tagName => {
+			class MockElement {
+				get [Symbol.toStringTag]() {
+					return tagName
+				}
+			}
+			return new MockElement()
+		}
+
+		const mockNodeList = (...els) => {
+			class MockNodeList {
+				*[Symbol.iterator]() {
+					yield* els
+				}
+				get [Symbol.toStringTag]() {
+					return 'NodeList'
+				}
+			}
+			return new MockNodeList()
+		}
+
+		describe('it should return empty, ignoring object members', () => {
+			;['HTMLElement', 'HTMLImageElement', 'HTMLAnchorElement'].forEach(
+				el =>
+					it(el, () => {
+						const input = Object.assign(mockElement(el), {
+							foo: true
+						})
+						const expected = []
+						const actual = Array.from(deepEntriesIterator(input))
+						expect(actual).toEqual(expected)
+					})
+			)
+		})
+
+		describe('it should return deep nested entries', () => {
+			const el1 = mockElement('HTMLElement')
+			const el2 = mockElement('HTMLImageElement')
+			const el3 = mockElement('HTMLAnchorElement')
+			const input = mockNodeList(el1, el2, el3)
+			const expected = [[0, el1], [1, el2], [2, el3]]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
 	describe('should optionally apply a transform function', () => {
 		const input = {
 			a: 0,
