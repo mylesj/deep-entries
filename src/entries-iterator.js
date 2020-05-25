@@ -4,7 +4,7 @@ export function* entriesIterator(input) {
 	switch (getInterface(input)) {
 		case 'Array':
 		case 'Map':
-		case 'URLSearchParam':
+		case 'URLSearchParams':
 			yield* input.entries()
 			break
 
