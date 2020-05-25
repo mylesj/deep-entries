@@ -16,6 +16,10 @@ export const isObjectLike = x => {
 			return false
 
 		default:
+			if (x === null) {
+				return false
+			}
+
 			if (tag.startsWith('HTML')) {
 				return false
 			}
