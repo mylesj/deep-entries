@@ -48,6 +48,28 @@ describe('deepEntriesIterator', () => {
 		)
 	})
 
+	describe('deep nested "empty" input', () => {
+		it('should return null entries', () => {
+			const input = [null, [null]]
+			const expected = [
+				[0, null], //
+				[1, 0, null]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return undefined entries', () => {
+			const input = [undefined, [undefined]]
+			const expected = [
+				[0, undefined], //
+				[1, 0, undefined]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
 	describe('should return an iterator that honours insertion order', () => {
 		const input = {
 			a: 1,
@@ -177,6 +199,32 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
+	describe('array-like members', () => {
+		describe('should consistently index typed-arrays by number', () => {
+			;[
+				Int8Array,
+				Uint8Array,
+				Uint8ClampedArray,
+				Int16Array,
+				Uint16Array,
+				Int32Array,
+				Uint32Array,
+				Float32Array,
+				Float64Array,
+				BigInt64Array,
+				BigUint64Array
+			].forEach(I =>
+				it(I.name, () => {
+					const n = I.name.startsWith('Big') ? 0n : 0
+					const input = I.from([n])
+					const expected = [[0, n]]
+					const actual = Array.from(deepEntriesIterator(input))
+					expect(actual).toEqual(expected)
+				})
+			)
+		})
+	})
+
 	describe('input type Map', () => {
 		it('should return entries, ignoring object members', () => {
 			const input = Object.assign(
@@ -212,8 +260,31 @@ describe('deepEntriesIterator', () => {
 		})
 	})
 
+	describe('input type URLSearchParams', () => {
+		it('should return entries, ignoring object members', () => {
+			const input = Object.assign(new URLSearchParams({ foo: true }), {
+				bar: true
+			})
+			const expected = [['foo', 'true']]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				value: new URLSearchParams({ foo: true, bar: false })
+			}
+			const expected = [
+				['value', 'foo', 'true'],
+				['value', 'bar', 'false']
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
 	describe('input type Set', () => {
-		it('should return entries, ignore object members', () => {
+		it('should return entries, ignoring object members', () => {
 			const input = Object.assign(
 				new Set([
 					1, //
@@ -260,6 +331,119 @@ describe('deepEntriesIterator', () => {
 				['value', 4, 0, '4', 0],
 				['value', 4, 0, '5', 0]
 			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
+	describe('not-normally-enumerated builtin object', () => {
+		describe('it should return empty, ignoring object members', () => {
+			it('when regex', () => {
+				const input = Object.assign(/foo/, {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when date', () => {
+				const input = Object.assign(new Date(), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed number', () => {
+				const input = Object.assign(new Number(1), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed boolean', () => {
+				const input = Object.assign(new Boolean(true), {
+					bar: true
+				})
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+
+			it('when boxed string (builtin iterator)', () => {
+				const input = new String('foo')
+				const expected = []
+				const actual = Array.from(deepEntriesIterator(input))
+				expect(actual).toEqual(expected)
+			})
+		})
+
+		it('should return deep nested entries', () => {
+			const input = {
+				regex: /foo/,
+				date: new Date(),
+				boxedNumber: new Number(1),
+				boxedBoolean: new Boolean(true),
+				boxedString: new String('foo')
+			}
+			const expected = [
+				['regex', input.regex],
+				['date', input.date],
+				['boxedNumber', input.boxedNumber],
+				['boxedBoolean', input.boxedBoolean],
+				['boxedString', input.boxedString]
+			]
+			const actual = Array.from(deepEntriesIterator(input))
+			expect(actual).toEqual(expected)
+		})
+	})
+
+	describe('DOM elements', () => {
+		const mockElement = tagName => {
+			class MockElement {
+				get [Symbol.toStringTag]() {
+					return tagName
+				}
+			}
+			return new MockElement()
+		}
+
+		const mockNodeList = (...els) => {
+			class MockNodeList {
+				*[Symbol.iterator]() {
+					yield* els
+				}
+				get [Symbol.toStringTag]() {
+					return 'NodeList'
+				}
+			}
+			return new MockNodeList()
+		}
+
+		describe('it should return empty, ignoring object members', () => {
+			;['HTMLElement', 'HTMLImageElement', 'HTMLAnchorElement'].forEach(
+				el =>
+					it(el, () => {
+						const input = Object.assign(mockElement(el), {
+							foo: true
+						})
+						const expected = []
+						const actual = Array.from(deepEntriesIterator(input))
+						expect(actual).toEqual(expected)
+					})
+			)
+		})
+
+		describe('it should return deep nested entries', () => {
+			const el1 = mockElement('HTMLElement')
+			const el2 = mockElement('HTMLImageElement')
+			const el3 = mockElement('HTMLAnchorElement')
+			const input = mockNodeList(el1, el2, el3)
+			const expected = [[0, el1], [1, el2], [2, el3]]
 			const actual = Array.from(deepEntriesIterator(input))
 			expect(actual).toEqual(expected)
 		})

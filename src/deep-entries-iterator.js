@@ -1,10 +1,10 @@
-import { identity } from './utils'
+import { identity, isObjectLike } from './utils'
 import { entriesIterator } from './entries-iterator'
 
 function* deepEntriesIterator_(input, mapFn, parentCircularSet) {
 	const map = typeof mapFn === 'function' ? mapFn : identity
 	for (let [key, value] of entriesIterator(input)) {
-		if (typeof value !== 'object') {
+		if (!isObjectLike(value)) {
 			const entry = map([key, value])
 			if (entry !== undefined) yield entry
 		} else {
