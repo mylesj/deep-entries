@@ -1,11 +1,10 @@
 [![npm version][img:npm-version]][repo:package]
 [![build status][img:repo-status]][repo:status]
 [![coverage status][img:coveralls]][ext:coveralls]
-[![conventional commits][img:commits]][ext:commits]
 
 # deep-entries
 
-A utility for returning deeply nested key-values as tuples of varying length.
+A utility that resolves deeply nested key-values as variadic tuples.
 
 -   Comparable to:
     -   [`Object.entries()`][ext:object.entries]
@@ -13,32 +12,76 @@ A utility for returning deeply nested key-values as tuples of varying length.
 
 ## exposes
 
+> Instances of `DeepEntry` will vary in length from one iteration
+> to the next but are essentially arrays of at least **2** elements.
+
+```typescript
+type DeepEntry = [unknown, unknown, ...unknown[]]
+```
+
 ### core functions
 
--   **deepEntries**  
-    => ( input: _Object | Array_, map?: _function_ ): _Array[]_
--   **deepEntriesIterator**  
-    => ( input: _Object | Array_, map?: _function_ ): _Iterator_
+> Typically `input` types will be `object | array` though other built-in
+> types should yield intuitive results. Object types such as `Date` and
+> `RegExp` will be treated as if primitive, _i.e._ returned as whole
+> values and not enumerated.
+
+#### deepEntries
+
+```typescript
+function deepEntries<T = DeepEntry>(
+	input: unknown,
+	mapFn?: (entry: DeepEntry) => T
+): T[]
+```
+
+#### deepEntriesIterator
+
+```typescript
+function deepEntriesIterator<T = DeepEntry>(
+	input: unknown,
+	mapFn?: (entry: DeepEntry) => T
+): IterableIterator<T>
+```
 
 ### map functions
 
--   **delimitEntryBy**  
-    => ( input: _string_ ): _function_
--   **delimitEntry**  
-    => ( input: _Array_ ): _Array_
--   **rotateEntryBy**  
-     => ( input: _integer_ ): _function_
--   **rotateEntry**  
-    => ( input: _Array_ ): _Array_
+#### delimitEntryBy
 
-### observations
+```typescript
+function delimitEntryBy<T = unknown>(
+	delimiter: string
+): (entry: DeepEntry) => [string, T]
+```
 
--   `deepEntries` & `deepEntriesIterator` ignore circular references
--   instances of `Set` will be converted to arrays
--   instances of `Map` will yield `Map.prototype.entries()`  
-    (limited support / usefulness TBD)
--   `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
--   `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
+#### delimitEntry
+
+> `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
+
+```typescript
+function delimitEntry<T = unknown>(entry: DeepEntry): [string, T]
+```
+
+#### rotateEntryBy
+
+```typescript
+function rotateEntryBy(n: number): (entry: DeepEntry) => DeepEntry
+```
+
+#### rotateEntry
+
+> `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
+
+```typescript
+function rotateEntry(entry: DeepEntry): DeepEntry
+```
+
+### misc. observations
+
+> In most use-cases `DeepEntry` keys will be of type `string | number`,
+> though instances of `Map` will yield `Map.prototype.entries()`, meaning
+> keys can be of any arbitrary type. If undesirable such results can be
+> filtered out via the `mapFn`.
 
 ## examples
 
@@ -57,9 +100,10 @@ const {
 } = require('deep-entries')
 ```
 
-A shape made up of both Objects or Arrays can be described in terms of deep entries. Only enumerable
-own-members will be returned and iteration will honour index and / or insertion order. The following
-examples will consume this input:
+A shape made up of both Objects or Arrays can be described in terms of
+deep entries. Only enumerable own-members will be returned and iteration
+will honour index and / or insertion order. The following examples will
+consume this input:
 
 ```js
 const input = {
@@ -79,7 +123,7 @@ const input = {
 }
 ```
 
-`deepEntries()` will return nested entries as arrays of varying length, with the value always trailing.
+Nested entries are returned as tuples of keys and a trailing value.
 
 ```js
 deepEntries(input)
@@ -93,7 +137,7 @@ deepEntries(input)
 // ]
 ```
 
-`deepEntries()` will accept an optional map function as a second parameter.
+An optional map function is accepted as a second parameter.
 
 ```js
 deepEntries(input, delimitEntry)
@@ -107,10 +151,9 @@ deepEntries(input, delimitEntry)
 // ]
 ```
 
-`deepEntries()` is an alias that collects all entries from a `deepEntriesIterator()`, which is
-also exposed to aid in performant iteration of larger structures. The `rotateEntry` map
-function rotates the entry array by `1` (_i.e._ putting the value first), allowing for more convenient
-destructuring of an entry.
+The rotate-functions are intended for convenience when destructuring
+an entry. Since JavaScript requires rest parameters only as the last
+parameter, rotating by **1** puts the value first instead.
 
 ```js
 for (let [value, ...keys] of deepEntriesIterator(input, rotateEntry)) {
@@ -145,8 +188,8 @@ Array.from(input)
 
 ### filtering
 
-The map functions passed to `deepEntries()` and `deepEntriesIterator()` can effectively filter out
-entries by not returning them - _i.e._ returning `undefined`.
+The map-functions can effectively filter out entries by not returning them,
+_i.e._ returning `undefined` instead.
 
 ```js
 const { last: getValue } = require('ramda')
@@ -158,8 +201,8 @@ deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // ]
 ```
 
-The map functions follow a pattern of returning `undefined` if passed `undefined` such that
-they may be composed with filters, without throwing errors.
+The map-functions follow a pattern of returning `undefined` if passed `undefined`
+such that they may be composed with filters, without throwing errors.
 
 ```js
 const { pipe } = require('ramda')
@@ -180,12 +223,10 @@ deepEntries(
 
 [repo:status]: https://travis-ci.org/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/3.0.1
+[repo:examples]: https://runkit.com/mylesj/deep-entries/4.0.0
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
-[ext:commits]: https://conventionalcommits.org
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
 [img:repo-status]: https://travis-ci.org/mylesj/deep-entries.svg?branch=master
 [img:npm-version]: https://badgen.net/npm/v/deep-entries
-[img:commits]: https://badgen.net/badge/conventional%20commits/1.0.0/yellow
 [img:coveralls]: https://coveralls.io/repos/github/mylesj/deep-entries/badge.svg?branch=master
