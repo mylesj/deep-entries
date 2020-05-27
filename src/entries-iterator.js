@@ -1,4 +1,4 @@
-import { getInterface, isObjectLike } from './utils'
+import { getInterface, isObjectLike } from './utils.js'
 
 export function* entriesIterator(input) {
 	switch (getInterface(input)) {
