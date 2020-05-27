@@ -17,7 +17,7 @@ A utility that resolves deeply nested key-values as variadic tuples.
 ### NPM
 
 ```none
-npm install deep-entries
+> npm install deep-entries
 ```
 
 ```js
