@@ -27,7 +27,8 @@ const { deepEntries } = require('deep-entries')
 ### Deno
 
 ```typescript
-import { deepEntries } from 'https://unpkg.com/deep-entries@VERSION/deno.js'
+// "https://unpkg.com/deep-entries@VERSION/deno.js" VERSION >= 4.0.1
+import { deepEntries } from 'https://unpkg.com/deep-entries/deno.js'
 ```
 
 ## exposes
