@@ -10,6 +10,26 @@ A utility that resolves deeply nested key-values as variadic tuples.
     -   [`Object.entries()`][ext:object.entries]
     -   [`Array.prototype.entries()`][ext:array.entries]
 
+**TL;DR:** [examples](#examples)
+
+## install
+
+### NPM
+
+```none
+npm install deep-entries
+```
+
+```js
+const { deepEntries } = require('deep-entries')
+```
+
+### Deno
+
+```typescript
+import { deepEntries } from 'https://unpkg.com/deep-entries@VERSION/deno.js'
+```
+
 ## exposes
 
 ```typescript

@@ -1,2 +1,2 @@
 /// <reference types="./types.d.ts" />
-export * from './src/index.js'
+export * from './dist/index.esm.js'
