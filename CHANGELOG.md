@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/mylesj/deep-entries/compare/v3.1.0...v4.0.0) (2020-05-27)
+
+### ⚠ BREAKING CHANGES
+
+-   regex, date etc. will yield empty when passed directly
+    and will be yielded as atomic values when found inside deep structures.
+
+### Features
+
+-   include minimal typescript typedef ([90c221c](https://github.com/mylesj/deep-entries/commit/90c221c783949d7fac0a29884910f1f7c23111e6))
+-   support direct deno import ([43c7b7f](https://github.com/mylesj/deep-entries/commit/43c7b7ff5698924c6fd8525631f53dda584a9708))
+-   treat DOM nodes like primitives - yield as values ([b0498c7](https://github.com/mylesj/deep-entries/commit/b0498c7f18dce058dad499830bf2de43456d2c28))
+-   treat regex, dates & boxed values like primitives ([4934f6f](https://github.com/mylesj/deep-entries/commit/4934f6fe8aa0340c2dd6086947d00540d96a0fb2))
+
+### Bug Fixes
+
+-   typed-array structures consistently keyed numerically ([f071e55](https://github.com/mylesj/deep-entries/commit/f071e55b8e036ce82f3eb896360946a45e8aeb97))
+-   yield deeply nested null values ([dd63ed1](https://github.com/mylesj/deep-entries/commit/dd63ed13ced184a14417bf2d9c096e3542f33b99))
+
 ## [3.1.0](https://github.com/mylesj/deep-entries/compare/v3.0.2...v3.1.0) (2019-07-21)
 
 ### Features
