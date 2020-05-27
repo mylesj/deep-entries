@@ -45,7 +45,8 @@ to the next but are essentially arrays of at least **2** elements.
 Typically `input` types will be `object | array` though other built-in
 types should yield intuitive results. Object types such as `Date` and
 `RegExp` will be treated as if primitive, _i.e._ returned as whole
-values and not enumerated.
+values and not enumerated. Objects resulting in a circular reference
+will be ignored.
 
 #### deepEntries
 
