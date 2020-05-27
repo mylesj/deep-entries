@@ -7,7 +7,7 @@ import {
 	delimitEntryBy,
 	rotateEntry,
 	rotateEntryBy
-} from '../src/index.js'
+} from '../deno.js'
 
 Deno.test('all imports have extensions', () => {
 	// listed in case of "unused import" linting

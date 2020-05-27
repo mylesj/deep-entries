@@ -1,5 +1,3 @@
-/// <reference types="../types.d.ts" />
-
 export { deepEntries } from './deep-entries.js'
 export { deepEntriesIterator } from './deep-entries-iterator.js'
 export { delimitEntry, delimitEntryBy } from './delimit-entry.js'
