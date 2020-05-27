@@ -31,7 +31,8 @@
 		"prebuild": "rimraf dist",
 		"build": "rollup -c",
 		"test": "jest -c jest.config.json",
-		"prerelease": "npm run build && npm run test",
+		"test-deno": "deno test ./test/_deno.js",
+		"prerelease": "npm run build && npm run test && npm run test-deno",
 		"release": "standard-version --commit-all"
 	},
 	"husky": {
