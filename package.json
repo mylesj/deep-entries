@@ -1,6 +1,6 @@
 {
 	"name": "deep-entries",
-	"version": "4.0.1",
+	"version": "4.0.2",
 	"description": "wrangle deep nested object entries",
 	"author": "mylesj <hi@myles.ninja>",
 	"license": "ISC",
