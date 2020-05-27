@@ -12,19 +12,19 @@ A utility that resolves deeply nested key-values as variadic tuples.
 
 ## exposes
 
-> Instances of `DeepEntry` will vary in length from one iteration
-> to the next but are essentially arrays of at least **2** elements.
-
 ```typescript
 type DeepEntry = [unknown, unknown, ...unknown[]]
 ```
 
+Instances of `DeepEntry` will vary in length from one iteration
+to the next but are essentially arrays of at least **2** elements.
+
 ### core functions
 
-> Typically `input` types will be `object | array` though other built-in
-> types should yield intuitive results. Object types such as `Date` and
-> `RegExp` will be treated as if primitive, _i.e._ returned as whole
-> values and not enumerated.
+Typically `input` types will be `object | array` though other built-in
+types should yield intuitive results. Object types such as `Date` and
+`RegExp` will be treated as if primitive, _i.e._ returned as whole
+values and not enumerated.
 
 #### deepEntries
 
@@ -56,7 +56,7 @@ function delimitEntryBy<T = unknown>(
 
 #### delimitEntry
 
-> `delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
+`delimitEntry` is an alias and is equivalent to `delimitEntryBy('.')`
 
 ```typescript
 function delimitEntry<T = unknown>(entry: DeepEntry): [string, T]
@@ -70,7 +70,7 @@ function rotateEntryBy(n: number): (entry: DeepEntry) => DeepEntry
 
 #### rotateEntry
 
-> `rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
+`rotateEntry` is an alias and is equivalent to `rotateEntryBy(1)`
 
 ```typescript
 function rotateEntry(entry: DeepEntry): DeepEntry
@@ -78,10 +78,10 @@ function rotateEntry(entry: DeepEntry): DeepEntry
 
 ### misc. observations
 
-> In most use-cases `DeepEntry` keys will be of type `string | number`,
-> though instances of `Map` will yield `Map.prototype.entries()`, meaning
-> keys can be of any arbitrary type. If undesirable such results can be
-> filtered out via the `mapFn`.
+In most use-cases `DeepEntry` keys will be of type `string | number`,
+though instances of `Map` will yield `Map.prototype.entries()`, meaning
+keys can be of any arbitrary type. If undesirable such results can be
+filtered out via the `mapFn`.
 
 ## examples
 
