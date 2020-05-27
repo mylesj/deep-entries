@@ -1,5 +1,5 @@
-import { identity, isObjectLike } from './utils'
-import { entriesIterator } from './entries-iterator'
+import { identity, isObjectLike } from './utils.js'
+import { entriesIterator } from './entries-iterator.js'
 
 function* deepEntriesIterator_(input, mapFn, parentCircularSet) {
 	const map = typeof mapFn === 'function' ? mapFn : identity

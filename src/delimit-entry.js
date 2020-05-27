@@ -1,4 +1,4 @@
-import { rotateEntry } from './rotate-entry'
+import { rotateEntry } from './rotate-entry.js'
 
 export const delimitEntryBy = delimiter => entry => {
 	if (entry === undefined) return

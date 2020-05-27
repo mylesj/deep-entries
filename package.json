@@ -21,15 +21,18 @@
 		"deepentry"
 	],
 	"files": [
-		"dist/"
+		"dist/",
+		"types.d.ts"
 	],
 	"main": "dist/index.cjs.js",
 	"module": "dist/index.esm.js",
+	"types": "types.d.ts",
 	"scripts": {
 		"prebuild": "rimraf dist",
 		"build": "rollup -c",
 		"test": "jest -c jest.config.json",
-		"prerelease": "npm run build && npm run test",
+		"test-deno": "deno test ./test/_deno.js",
+		"prerelease": "npm run build && npm run test && npm run test-deno",
 		"release": "standard-version --commit-all"
 	},
 	"husky": {
@@ -38,7 +41,7 @@
 		}
 	},
 	"lint-staged": {
-		"**/*.{js,json,md}": [
+		"**/*.{ts,js,json,md}": [
 			"prettier --write",
 			"git add"
 		]
