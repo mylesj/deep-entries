@@ -1,3 +1,5 @@
+// verify deno import works with bundled dist
+
 import { assert, assertEquals } from 'https://deno.land/std/testing/asserts.ts'
 
 import {
@@ -9,7 +11,7 @@ import {
 	rotateEntryBy
 } from '../deno.js'
 
-Deno.test('all imports have extensions', () => {
+Deno.test('DIST: all imports have extensions', () => {
 	// listed in case of "unused import" linting
 	// and / or unintended dead-code elimination
 	deepEntries
@@ -22,7 +24,7 @@ Deno.test('all imports have extensions', () => {
 	assert(true)
 })
 
-Deno.test('basic input / output', () => {
+Deno.test('DIST: basic input / output', () => {
 	const input = [1, [2, [3]]]
 	const expected = [
 		[0, 1], //

@@ -34,7 +34,7 @@
 		"prebuild": "rimraf dist",
 		"build": "rollup -c",
 		"test": "jest -c jest.config.json",
-		"test-deno": "deno test ./test/_deno.js",
+		"test-deno": "deno test ./test/_deno-{dist,src}.js",
 		"prerelease": "npm run build && npm run test && npm run test-deno",
 		"release": "standard-version --commit-all"
 	},
