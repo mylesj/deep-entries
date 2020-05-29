@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [4.0.2](https://github.com/mylesj/deep-entries/compare/v4.0.1...v4.0.2) (2020-05-27)
 
+### Docs
+
+-   various corrections
+
 ### [4.0.1](https://github.com/mylesj/deep-entries/compare/v4.0.0...v4.0.1) (2020-05-27)
+
+### Bug Fixes
+
+-   point deno target to correct index in dist
 
 ## [4.0.0](https://github.com/mylesj/deep-entries/compare/v3.1.0...v4.0.0) (2020-05-27)
 
