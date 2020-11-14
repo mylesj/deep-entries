@@ -2,7 +2,7 @@
 	"name": "deep-entries",
 	"version": "4.0.2",
 	"description": "wrangle deep nested object entries",
-	"author": "mylesj <hi@myles.ninja>",
+	"author": "mylesj <hi@mylesj.dev>",
 	"license": "ISC",
 	"repository": "github:mylesj/deep-entries",
 	"bugs": "https://github.com/mylesj/deep-entries/issues",
