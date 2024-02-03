@@ -1,4 +1,1 @@
-semi: false
-useTabs: true
-tabWidth: 4
-singleQuote: true
+"@mylesj/prettier-config"

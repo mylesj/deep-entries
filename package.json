@@ -1,50 +1,51 @@
 {
-	"type": "module",
-	"name": "deep-entries",
-	"version": "4.0.2",
-	"description": "wrangle deep nested object entries",
-	"author": "mylesj <hi@mylesj.dev>",
-	"license": "ISC",
-	"repository": "https://github.com/mylesj/deep-entries",
-	"bugs": "https://github.com/mylesj/deep-entries/issues",
-	"keywords": [
-		"object",
-		"entries",
-		"object.entries",
-		"iterator",
-		"generator",
-		"nested",
-		"array",
-		"flatten",
-		"flat",
-		"deep",
-		"deepentries",
-		"deepentry",
-		"wrangling"
-	],
-	"files": [
-		"src/",
-		"types.d.ts"
-	],
-	"exports": "./src/index.mjs",
-	"types": "types.d.ts",
-	"scripts": {
-		"prepare": "husky",
-		"test": "rimraf test/coverage && c8 mocha",
-		"prerelease": "$npm_execpath run test",
-		"release": "standard-version --commit-all"
-	},
-	"devDependencies": {
-		"c8": "^9.1.0",
-		"chai": "^5.0.3",
-		"husky": "^9.0.10",
-		"lint-staged": "^15.2.1",
-		"mocha": "^10.2.0",
-		"prettier": "^3.2.4",
-		"rimraf": "^5.0.5",
-		"standard-version": "^9.5.0"
-	},
-	"engines": {
-		"node": ">=16"
-	}
+    "type": "module",
+    "name": "deep-entries",
+    "version": "4.0.2",
+    "description": "wrangle deep nested object entries",
+    "author": "mylesj <hi@mylesj.dev>",
+    "license": "ISC",
+    "repository": "github:mylesj/deep-entries",
+    "bugs": "https://github.com/mylesj/deep-entries/issues",
+    "keywords": [
+        "object",
+        "entries",
+        "object.entries",
+        "iterator",
+        "generator",
+        "nested",
+        "array",
+        "flatten",
+        "flat",
+        "deep",
+        "deepentries",
+        "deepentry",
+        "wrangling"
+    ],
+    "files": [
+        "src/",
+        "types.d.ts"
+    ],
+    "exports": "./src/index.mjs",
+    "types": "types.d.ts",
+    "scripts": {
+        "prepare": "husky",
+        "test": "rimraf test/coverage && c8 mocha",
+        "prerelease": "$npm_execpath run test",
+        "release": "standard-version --commit-all"
+    },
+    "devDependencies": {
+        "@mylesj/prettier-config": "^1.0.1",
+        "c8": "^9.1.0",
+        "chai": "^5.0.3",
+        "husky": "^9.0.10",
+        "lint-staged": "^15.2.1",
+        "mocha": "^10.2.0",
+        "prettier": "^3.2.4",
+        "rimraf": "^5.0.5",
+        "standard-version": "^9.5.0"
+    },
+    "engines": {
+        "node": ">=16"
+    }
 }
