@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { rotateEntryBy, rotateEntry } from '../src/rotate-entry.js'
+import { rotateEntryBy, rotateEntry } from '../src/index.mjs'
 
 describe('rotateEntryBy', () => {
 	it('should return undefined if the input is undefined', () => {

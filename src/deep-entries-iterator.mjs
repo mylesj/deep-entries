@@ -1,5 +1,5 @@
-import { identity, isObjectLike } from './utils.js'
-import { entriesIterator } from './entries-iterator.js'
+import { identity, isObjectLike } from './utils.mjs'
+import { entriesIterator } from './entries-iterator.mjs'
 
 function* deepEntriesIterator_(input, mapFn, parentCircularSet) {
 	const map = typeof mapFn === 'function' ? mapFn : identity
@@ -15,7 +15,7 @@ function* deepEntriesIterator_(input, mapFn, parentCircularSet) {
 				for (let entries of deepEntriesIterator_(
 					value,
 					undefined,
-					circularSet
+					circularSet,
 				)) {
 					const entry = map([key, ...entries])
 					if (entry !== undefined) yield entry

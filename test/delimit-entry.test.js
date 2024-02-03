@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 
-import { delimitEntryBy, delimitEntry } from '../src/delimit-entry.js'
+import { delimitEntryBy, delimitEntry } from '../src/index.mjs'
 
 describe('delimitEntryBy', () => {
 	it('should return undefined if the input is undefined', () => {

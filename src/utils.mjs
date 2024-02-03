@@ -1,11 +1,11 @@
-export const identity = x => x
+export const identity = (x) => x
 
-export const getInterface = x => {
+export const getInterface = (x) => {
 	const str = Object.prototype.toString.call(x)
 	return str.substring(8, str.length - 1)
 }
 
-export const isObjectLike = x => {
+export const isObjectLike = (x) => {
 	const tag = getInterface(x)
 	switch (tag) {
 		case 'String':

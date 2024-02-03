@@ -1,6 +1,6 @@
-import { rotateEntry } from './rotate-entry.js'
+import { rotateEntry } from './rotate-entry.mjs'
 
-export const delimitEntryBy = delimiter => entry => {
+export const delimitEntryBy = (delimiter) => (entry) => {
 	if (entry === undefined) return
 	const [value, ...keys] = rotateEntry(entry)
 	return [keys.join(delimiter), value]

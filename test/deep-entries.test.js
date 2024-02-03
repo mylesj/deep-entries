@@ -1,7 +1,6 @@
 import { expect } from 'chai'
 
-import { deepEntries } from '../src/deep-entries.js'
-import { delimitEntry } from '../src/delimit-entry.js'
+import { deepEntries, delimitEntry } from '../src/index.mjs'
 
 describe('deepEntries', () => {
 	describe('input attributes', () => {
