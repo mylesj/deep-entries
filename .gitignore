@@ -3,6 +3,9 @@ Thumbs.db
 
 *.log
 
-test/coverage/
-node_modules/
-dist/
+yarn.lock
+packag-lock.json
+
+/test/coverage
+/node_modules
+/dist
