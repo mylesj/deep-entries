@@ -1,9 +1,6 @@
-import pkg from './package.json'
+import pkg from './package.json' with { type: 'json' }
 
 export default {
-  input: 'src/index.js',
-  output: [
-    { file: pkg.main, format: 'cjs' },
-    { file: pkg.module, format: 'es' }
-  ]
+	input: 'src/index.js',
+	output: [{ file: pkg.exports, format: 'es' }],
 }

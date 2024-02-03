@@ -1,10 +1,11 @@
 {
+	"type": "module",
 	"name": "deep-entries",
 	"version": "4.0.2",
 	"description": "wrangle deep nested object entries",
 	"author": "mylesj <hi@mylesj.dev>",
 	"license": "ISC",
-	"repository": "github:mylesj/deep-entries",
+	"repository": "https://github.com/mylesj/deep-entries",
 	"bugs": "https://github.com/mylesj/deep-entries/issues",
 	"keywords": [
 		"object",
@@ -19,44 +20,34 @@
 		"deep",
 		"deepentries",
 		"deepentry",
-		"wrangling",
-		"deno"
+		"wrangling"
 	],
 	"files": [
 		"dist/",
-		"deno.js",
 		"types.d.ts"
 	],
-	"main": "dist/index.cjs.js",
-	"module": "dist/index.esm.js",
+	"exports": "./dist/index.mjs",
 	"types": "types.d.ts",
 	"scripts": {
+		"prepare": "husky",
 		"prebuild": "rimraf dist",
 		"build": "rollup -c",
-		"test": "jest -c jest.config.json",
-		"test-deno": "deno test ./test/_deno-{dist,src}.js",
-		"prerelease": "npm run build && npm run test && npm run test-deno",
+		"test": "rimraf test/coverage && c8 mocha",
+		"prerelease": "$npm_execpath run build && $npm_execpath run test",
 		"release": "standard-version --commit-all"
 	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "lint-staged"
-		}
-	},
-	"lint-staged": {
-		"**/*.{ts,js,json,md}": [
-			"prettier --write"
-		]
-	},
 	"devDependencies": {
-		"husky": "^4.2.5",
-		"jest": "^26.0.1",
-		"lint-staged": "^10.2.6",
-		"prettier": "*",
-		"rimraf": "^3.0.2",
-		"rollup": "^2.10.8",
-		"rollup-jest": "^0.0.2",
-		"standard-version": "^8.0.0"
+		"c8": "^9.1.0",
+		"chai": "^5.0.3",
+		"husky": "^9.0.10",
+		"lint-staged": "^15.2.1",
+		"mocha": "^10.2.0",
+		"prettier": "^3.2.4",
+		"rimraf": "^5.0.5",
+		"rollup": "^4.9.6",
+		"standard-version": "^9.5.0"
 	},
-	"dependencies": {}
+	"engines": {
+		"node": ">=16"
+	}
 }
