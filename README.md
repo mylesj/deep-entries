@@ -45,8 +45,8 @@ will be ignored.
 
 ```typescript
 function deepEntries<T = DeepEntry>(
-	input: unknown,
-	mapFn?: (entry: DeepEntry) => T,
+    input: unknown,
+    mapFn?: (entry: DeepEntry) => T,
 ): T[]
 ```
 
@@ -54,8 +54,8 @@ function deepEntries<T = DeepEntry>(
 
 ```typescript
 function deepEntriesIterator<T = DeepEntry>(
-	input: unknown,
-	mapFn?: (entry: DeepEntry) => T,
+    input: unknown,
+    mapFn?: (entry: DeepEntry) => T,
 ): IterableIterator<T>
 ```
 
@@ -65,7 +65,7 @@ function deepEntriesIterator<T = DeepEntry>(
 
 ```typescript
 function delimitEntryBy<T = unknown>(
-	delimiter: string,
+    delimiter: string,
 ): (entry: DeepEntry) => [string, T]
 ```
 
@@ -106,12 +106,12 @@ filtered out via the `mapFn`.
 
 ```js
 import {
-	deepEntries,
-	deepEntriesIterator,
-	delimitEntryBy,
-	rotateEntryBy,
-	delimitEntry,
-	rotateEntry,
+    deepEntries,
+    deepEntriesIterator,
+    delimitEntryBy,
+    rotateEntryBy,
+    delimitEntry,
+    rotateEntry,
 } from 'deep-entries'
 ```
 
@@ -122,19 +122,19 @@ consume this input:
 
 ```js
 const input = {
-	foo: 1,
-	bar: {
-		deep: {
-			key: 2,
-		},
-	},
-	baz: [
-		3,
-		[4, 5],
-		{
-			key: 6,
-		},
-	],
+    foo: 1,
+    bar: {
+        deep: {
+            key: 2,
+        },
+    },
+    baz: [
+        3,
+        [4, 5],
+        {
+            key: 6,
+        },
+    ],
 }
 ```
 
@@ -172,7 +172,7 @@ parameter, rotating by **1** puts the value first instead.
 
 ```js
 for (let [value, ...keys] of deepEntriesIterator(input, rotateEntry)) {
-	console.log(keys, value)
+    console.log(keys, value)
 }
 // [ 'foo' ] 1
 // [ 'bar', 'deep', 'key' ] 2
@@ -202,12 +202,12 @@ The map-functions follow a pattern of returning `undefined` early if passed
 
 ```js
 const pipe =
-	(...fns) =>
-	(input) =>
-		fns.reduce((acc, fn) => fn(acc), input)
+    (...fns) =>
+    (input) =>
+        fns.reduce((acc, fn) => fn(acc), input)
 
 const atDepth = (n) => (entry) => {
-	if (entry.length === 2 + n) return entry
+    if (entry.length === 2 + n) return entry
 }
 
 deepEntries(input, pipe(atDepth(1), delimitEntry))
