@@ -20,8 +20,14 @@ A utility that resolves deeply nested key-values as variadic tuples.
 > npm install deep-entries
 ```
 
-```js
+```javascript
 import { deepEntries } = from 'deep-entries'
+```
+
+### Deno
+
+```javascript
+import { deepEntries } from 'https://deno.land/x/deepentries@v5/src/index.mjs'
 ```
 
 ## exposes
