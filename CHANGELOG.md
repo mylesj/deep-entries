@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/mylesj/deep-entries/compare/v4.0.2...v5.0.0) (2024-02-04)
+
+### ⚠ BREAKING CHANGES
+
+-   This package is now pure ESM, It cannot be `require()`'d from CommonJS.
+
+    -   [what?](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+    -   [why?](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+
+-   first-class esm support (#25) ([4036edc](https://github.com/mylesj/deep-entries/commit/4036edc02f3951097d307324544616bff51d4bda)), closes [#25](https://github.com/mylesj/deep-entries/issues/25)
+
 ### [4.0.2](https://github.com/mylesj/deep-entries/compare/v4.0.1...v4.0.2) (2020-05-27)
 
 ### Docs

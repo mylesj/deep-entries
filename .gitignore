@@ -2,6 +2,7 @@
 Thumbs.db
 
 *.log
+*.tgz
 
 yarn.lock
 packag-lock.json
