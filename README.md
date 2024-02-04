@@ -1,5 +1,5 @@
+[![github][img:github]][repo:github]
 [![npm version][img:npm-version]][repo:package]
-[![build status][img:repo-status]][repo:status]
 [![coverage status][img:coveralls]][ext:coveralls]
 
 # deep-entries
@@ -21,14 +21,7 @@ A utility that resolves deeply nested key-values as variadic tuples.
 ```
 
 ```js
-const { deepEntries } = require('deep-entries')
-```
-
-### Deno
-
-```typescript
-// "https://unpkg.com/deep-entries@VERSION/deno.js" VERSION >= 4.0.1
-import { deepEntries } from 'https://unpkg.com/deep-entries/deno.js'
+import { deepEntries } = from 'deep-entries'
 ```
 
 ## exposes
@@ -53,7 +46,7 @@ will be ignored.
 ```typescript
 function deepEntries<T = DeepEntry>(
 	input: unknown,
-	mapFn?: (entry: DeepEntry) => T
+	mapFn?: (entry: DeepEntry) => T,
 ): T[]
 ```
 
@@ -62,7 +55,7 @@ function deepEntries<T = DeepEntry>(
 ```typescript
 function deepEntriesIterator<T = DeepEntry>(
 	input: unknown,
-	mapFn?: (entry: DeepEntry) => T
+	mapFn?: (entry: DeepEntry) => T,
 ): IterableIterator<T>
 ```
 
@@ -72,7 +65,7 @@ function deepEntriesIterator<T = DeepEntry>(
 
 ```typescript
 function delimitEntryBy<T = unknown>(
-	delimiter: string
+	delimiter: string,
 ): (entry: DeepEntry) => [string, T]
 ```
 
@@ -107,19 +100,19 @@ filtered out via the `mapFn`.
 
 ## examples
 
-» [RunKit][repo:examples]
+» [StackBlitz Playground][repo:examples]
 
 ### usage
 
 ```js
-const {
+import {
 	deepEntries,
 	deepEntriesIterator,
 	delimitEntryBy,
 	rotateEntryBy,
 	delimitEntry,
-	rotateEntry
-} = require('deep-entries')
+	rotateEntry,
+} from 'deep-entries'
 ```
 
 A shape made up of both Objects or Arrays can be described in terms of
@@ -132,16 +125,16 @@ const input = {
 	foo: 1,
 	bar: {
 		deep: {
-			key: 2
-		}
+			key: 2,
+		},
 	},
 	baz: [
 		3,
 		[4, 5],
 		{
-			key: 6
-		}
-	]
+			key: 6,
+		},
+	],
 }
 ```
 
@@ -189,33 +182,14 @@ for (let [value, ...keys] of deepEntriesIterator(input, rotateEntry)) {
 // [ 'baz', 2, 'key' ] 6
 ```
 
-It's worth noting that objects can have assigned iterators too.
-
-```js
-const { withIterator } = require('with-iterator')
-const withDeepEntriesIterator = withIterator(function*() {
-	yield* deepEntriesIterator(this, delimitEntryBy(':'))
-})
-withDeepEntriesIterator(input)
-Array.from(input)
-// [
-//     [ 'foo', 1 ],
-//     [ 'bar:deep:key', 2 ],
-//     [ 'baz:0', 3 ],
-//     [ 'baz:1:0', 4 ],
-//     [ 'baz:1:1', 5 ],
-//     [ 'baz:2:key', 6 ]
-// ]
-```
-
 ### filtering
 
-The map-functions can effectively filter out entries by not returning them,
-_i.e._ returning `undefined` instead.
+The map-functions can also filter out entries by not returning them,
+_i.e._ explicitly returning `undefined` instead.
 
 ```js
-const { last: getValue } = require('ramda')
-deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
+const getValue = (entry) => entry[entry.length - 1]
+deepEntries(input, (entry) => (getValue(entry) > 3 ? entry : undefined))
 // [
 //     [ 'baz', 1, 0, 4 ],
 //     [ 'baz', 1, 1, 5 ],
@@ -223,32 +197,31 @@ deepEntries(input, entry => (getValue(entry) > 3 ? entry : undefined))
 // ]
 ```
 
-The map-functions follow a pattern of returning `undefined` if passed `undefined`
-such that they may be composed with filters, without throwing errors.
+The map-functions follow a pattern of returning `undefined` early if passed
+`undefined`, such that they may be composed with filters and not throw errors.
 
 ```js
-const { pipe } = require('ramda')
-const atDepth = n => entry => {
+const pipe =
+	(...fns) =>
+	(input) =>
+		fns.reduce((acc, fn) => fn(acc), input)
+
+const atDepth = (n) => (entry) => {
 	if (entry.length === 2 + n) return entry
 }
-deepEntries(
-	input,
-	pipe(
-		atDepth(1),
-		delimitEntry
-	)
-)
+
+deepEntries(input, pipe(atDepth(1), delimitEntry))
 // [
 //     [ 'baz.0', 3 ]
 // ]
 ```
 
-[repo:status]: https://travis-ci.org/mylesj/deep-entries
+[repo:github]: https://github.com/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://runkit.com/mylesj/deep-entries/4.0.0
+[repo:examples]: https://stackblitz.com/~/edit/stackblitz-starters-kuw4qq?file=index.mjs&view=editor
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
-[img:repo-status]: https://travis-ci.org/mylesj/deep-entries.svg?branch=master
-[img:npm-version]: https://badgen.net/npm/v/deep-entries
-[img:coveralls]: https://coveralls.io/repos/github/mylesj/deep-entries/badge.svg?branch=master
+[img:github]: https://img.shields.io/badge/%20-Source-555555?logo=github&style=for-the-badge
+[img:npm-version]: https://img.shields.io/npm/v/deep-entries?&label=%20&logo=npm&style=for-the-badge
+[img:coveralls]: https://img.shields.io/coverallsCoverage/github/mylesj/deep-entries?branch=master&style=for-the-badge&logo=coveralls
