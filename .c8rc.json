@@ -1,0 +1,6 @@
+{
+    "all": true,
+    "report-dir": "test/coverage",
+    "reporter": ["lcov"],
+    "include": ["src/**"]
+}
