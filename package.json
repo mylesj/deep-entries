@@ -1,7 +1,7 @@
 {
     "type": "module",
     "name": "deep-entries",
-    "version": "5.0.1",
+    "version": "5.0.2",
     "description": "wrangle deep nested object entries",
     "author": "mylesj <hi@mylesj.dev>",
     "license": "ISC",
