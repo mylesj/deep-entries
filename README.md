@@ -1,5 +1,6 @@
 [![github][img:github]][repo:github]
 [![npm version][img:npm-version]][repo:package]
+[![deno version][img:deno-version]][repo:denoland]
 [![coverage status][img:coveralls]][ext:coveralls]
 
 # deep-entries
@@ -26,7 +27,10 @@ import { deepEntries } = from 'deep-entries'
 
 ### Deno
 
+Either / or:
+
 ```javascript
+import { deepEntries } from 'npm:deep-entries'
 import { deepEntries } from 'https://deno.land/x/deepentries@v5/src/index.mjs'
 ```
 
@@ -106,7 +110,7 @@ filtered out via the `mapFn`.
 
 ## examples
 
-» [StackBlitz Playground][repo:examples]
+» [StackBlitz examples][repo:examples]
 
 ### usage
 
@@ -224,10 +228,12 @@ deepEntries(input, pipe(atDepth(1), delimitEntry))
 
 [repo:github]: https://github.com/mylesj/deep-entries
 [repo:package]: https://www.npmjs.com/package/deep-entries
-[repo:examples]: https://stackblitz.com/~/edit/stackblitz-starters-kuw4qq?file=index.mjs&view=editor
+[repo:denoland]: https://deno.land/x/deepentries
+[repo:examples]: https://stackblitz.com/~/edit/deep-entries?file=index.mjs&view=editor
 [ext:object.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 [ext:array.entries]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries
 [ext:coveralls]: https://coveralls.io/github/mylesj/deep-entries?branch=master
 [img:github]: https://img.shields.io/badge/%20-Source-555555?logo=github&style=for-the-badge
 [img:npm-version]: https://img.shields.io/npm/v/deep-entries?&label=%20&logo=npm&style=for-the-badge
+[img:deno-version]: https://img.shields.io/npm/v/deep-entries?&label=%20&logo=deno&color=555555&style=for-the-badge
 [img:coveralls]: https://img.shields.io/coverallsCoverage/github/mylesj/deep-entries?branch=master&style=for-the-badge&logo=coveralls
